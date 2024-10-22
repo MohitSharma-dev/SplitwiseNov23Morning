@@ -1,26 +1,26 @@
 package com.backendlld.splitwisenov23morning;
 
+import com.backendlld.splitwisenov23morning.commands.Command;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
 public class SplitwiseNov23MorningApplication implements CommandLineRunner {
     private static Scanner scanner = new Scanner(System.in);
+    private List<Command> commands = new ArrayList<>();
     @Override
     public void run(String... args) throws Exception {
         String input = scanner.nextLine();
-//        first try to match it with a command using the first word
-        List<String> words = List.of(input.split(" "));
-//        RegisterUser email password
-        if(words.get(0).equals("RegisterUser") && words.size() == 3){
-            String email = words.get(1);
-            String password = words.get(2);
-//            create a request DTO
-//            call the corresponding controller
+//
+        for(Command command : commands) {
+            if((command.matches(input))){
+                command.execute(input);
+            }
         }
 
     }
